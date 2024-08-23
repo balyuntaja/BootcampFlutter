@@ -17,20 +17,32 @@
 //   }
 // }
 
+
+// No. 2 Looping menggunakan for
+// void main(){
+//  for(var angka = 1; angka <= 20; angka++) {
+//   if (angka % 2 == 1) {
+//     if (angka % 3 == 0) {
+//       print("$angka - I love coding");      
+//     } else {
+//       print("$angka - Santai");
+//     }    
+//   } else {
+//     print("$angka - berkualitas");
+//   }
+//  } 
+// }
+
+// 
+
 void main() {
+  int width = 8;
+  int height = 4;
 
-  for (var deret = 0; deret < 10; deret += 2) {
-
-    print('Iterasi dengan Increment counter 2: ' + deret.toString());
-
+  for (int i = 0; i < height; i++) {
+    for (int j = 0; j < width; j++) {
+      print('#');
+    }
+    print('');
   }
-
-  print('-------------------------------');
-
-  for (var deret = 15; deret > 0; deret -= 3) {
-
-    print('Iterasi dengan Decrement counter : ' + deret.toString());
-
-  }
-
 }
