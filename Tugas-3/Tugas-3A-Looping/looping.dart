@@ -33,16 +33,31 @@
 //  } 
 // }
 
-// 
+// No. 3 Membuat Persegi
 
-void main() {
-  int width = 8;
-  int height = 4;
+// void main() {
+//   var x = 4;
+//   var y = 8;
+//   var z = '';
 
-  for (int i = 0; i < height; i++) {
-    for (int j = 0; j < width; j++) {
-      print('#');
-    }
-    print('');
-  }
-}
+//   for (var i = 0; i < x; i++) {
+//     for (var j = 0; j <= y; j++) {
+//       z += '#';
+//     }
+//     z += '\n';
+//   }
+//     print(z);
+// }
+
+// No. 4 Membuat Tangga
+
+// void main() {
+//   var x = '';
+//   for (var i = 0; i < 7; i++) {
+//     for (var j = 0; j <= i; j++) {
+//       x += '#';
+//     }
+//     x += '\n';
+//   }
+//     print(x);
+// }
