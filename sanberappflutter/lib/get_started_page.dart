@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sanberappflutter/app/config/app_assets.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,7 +31,7 @@ class GetStartedPage extends StatelessWidget {
                 height: 330,
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage('assets/image_news.png'))),
+                        image: AssetImage(AppAssets.imageNews))),
               ),
               SizedBox(height: 40),
               Text(
