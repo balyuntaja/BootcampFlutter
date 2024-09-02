@@ -85,7 +85,7 @@ class NewsPage extends StatelessWidget {
                       urlImage: AppAssets.separator, width: 311, height: 2),
                   SizedBox(height: 32),
                   Text(
-                    'In the last couple of years, we’ve seen new teams in tech companies emerge that focus on responsible innovation, digital well-being, AI ethics or humane use.',
+                    'In the last couple of years, we’ve seen new teams in tech companies emerge that focus on responsible innovation, digital well-being, AI ethics or humane use. Whatever their titles, these individuals are given the task of “leading” ethics at their companies.',
                     style: GoogleFonts.poppins(
                         color: blackColor,
                         fontSize: 16,
