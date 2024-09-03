@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sanberappflutter/pages/get_started_page.dart';
 import 'package:sanberappflutter/pages/home/home_page.dart';
 import 'package:sanberappflutter/pages/home/news_page.dart';
 import 'package:sanberappflutter/user/page/user_page.dart';
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: UserPage(),
+      home: GetStartedPage(),
     );
   }
 }
