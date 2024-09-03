@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sanberappflutter/app/config/app_assets.dart';
 import 'package:sanberappflutter/app/config/app_color.dart';
-import 'package:sanberappflutter/app/config/app_text_style.dart';
-import 'package:sanberappflutter/model/news_model.dart';
 import 'package:sanberappflutter/widget/custom_box_image.dart';
 
 class NewsPage extends StatelessWidget {
@@ -12,47 +10,49 @@ class NewsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          CustomBoxImage(
-            urlImage: AppAssets.imageNewsbg,
-            width: 413,
-            height: 413,
-            child: Stack(
-              children: [
-                Column(
-                  children: [
-                    Row(
-                      children: [
-                        CustomBoxImage(
-                          urlImage: AppAssets.iconNavbar,
-                          width: 40,
-                          height: 40,
-                          margin: EdgeInsets.only(left: 40, top: 40),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
+      body: SingleChildScrollView(
+        // Tambahkan SingleChildScrollView di sini
+        child: Column(
+          children: [
+            CustomBoxImage(
+              urlImage: AppAssets.imageNewsbg,
+              width: 413,
+              height: 413,
+              child: Stack(
+                children: [
+                  Column(
+                    children: [
+                      Row(
+                        children: [
+                          CustomBoxImage(
+                            urlImage: AppAssets.iconNavbar,
+                            width: 40,
+                            height: 40,
+                            margin: EdgeInsets.only(left: 40, top: 40),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 30, right: 30, top: 40),
-            child: Row(
-              children: [
-                CustomBoxImage(
-                    urlImage: AppAssets.profile, width: 40, height: 40),
-                SizedBox(width: 16),
-                Text(
-                  'Samuel Newton',
-                  style: GoogleFonts.poppins(color: blackColor, fontSize: 14),
-                ),
-              ],
+            Padding(
+              padding: const EdgeInsets.only(left: 30, right: 30, top: 40),
+              child: Row(
+                children: [
+                  CustomBoxImage(
+                      urlImage: AppAssets.profile, width: 40, height: 40),
+                  SizedBox(width: 16),
+                  Text(
+                    'Samuel Newton',
+                    style: GoogleFonts.poppins(color: blackColor, fontSize: 14),
+                  ),
+                ],
+              ),
             ),
-          ),
-          Expanded(
-            child: Padding(
+            Padding(
+              // Expanded diganti menjadi Padding biasa
               padding: const EdgeInsets.only(left: 30, right: 30, top: 32),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,8 +94,8 @@ class NewsPage extends StatelessWidget {
                 ],
               ),
             ),
-          )
-        ],
+          ],
+        ),
       ),
     );
   }

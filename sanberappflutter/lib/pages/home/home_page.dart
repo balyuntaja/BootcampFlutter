@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sanberappflutter/app/config/app_assets.dart';
-import 'package:sanberappflutter/app/config/app_color.dart';
-import 'package:sanberappflutter/app/config/app_text_style.dart';
-import 'package:sanberappflutter/model/news_model.dart';
 import 'package:sanberappflutter/widget/custom_box_image.dart';
 import 'package:sanberappflutter/widget/news_content.dart';
 import 'package:sanberappflutter/widget/slide_news_content.dart';
