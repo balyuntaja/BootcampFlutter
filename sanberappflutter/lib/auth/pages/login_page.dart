@@ -1,7 +1,32 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:sanberappflutter/pages/home/home_page.dart';
+import 'package:sanberappflutter/widget/custom_text_form_field.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  LoginPage({super.key});
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  Future<void> _signInWithEmailAndPassword(
+      String email, String password, BuildContext context) async {
+    try {
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage()),
+        (Route<dynamic> route) => false,
+      );
+      print("Login successful");
+    } on FirebaseAuthException catch (e) {
+      print('Login Error: ${e.message}');
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Login Error: ${e.message}'),
+      ));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,23 +41,26 @@ class LoginPage extends StatelessWidget {
                 child: Container(
                   width: 352,
                   height: 330,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage('assets/image/image_news_login.png'),
                     ),
                   ),
                 ),
               ),
-              SizedBox(height: 40),
+              const SizedBox(height: 40),
               CustomTextFormField(
                 label: 'Masukkan Email',
+                controller: _emailController,
               ),
               CustomTextFormField(
                 label: 'Password',
+                controller: _passwordController,
+                obscureText: true,
               ),
-              SizedBox(height: 7),
-              Text('Lupa password?', textAlign: TextAlign.end),
-              SizedBox(height: 24),
+              const SizedBox(height: 7),
+              const Text('Lupa password?', textAlign: TextAlign.end),
+              const SizedBox(height: 24),
               SizedBox(
                 height: 52,
                 width: double.infinity,
@@ -40,16 +68,19 @@ class LoginPage extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8)),
-                      backgroundColor: Color(0xff3498DB)),
-                  onPressed: () {},
-                  child: Text(
+                      backgroundColor: const Color(0xff3498DB)),
+                  onPressed: () {
+                    _signInWithEmailAndPassword(_emailController.text,
+                        _passwordController.text, context);
+                  },
+                  child: const Text(
                     'Masuk',
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
               ),
-              SizedBox(height: 40),
-              Row(
+              const SizedBox(height: 40),
+              const Row(
                 children: [
                   Expanded(
                     child: Divider(
@@ -65,13 +96,14 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                      child: Divider(
-                    color: Color(0xffC0C0C0),
-                    height: 3,
-                  )),
+                    child: Divider(
+                      color: Color(0xffC0C0C0),
+                      height: 3,
+                    ),
+                  ),
                 ],
               ),
-              SizedBox(height: 40),
+              const SizedBox(height: 40),
               Material(
                 color: Colors.white,
                 child: SizedBox(
@@ -81,7 +113,7 @@ class LoginPage extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                         surfaceTintColor: Colors.white,
                         shape: RoundedRectangleBorder(
-                            side: BorderSide(color: Colors.red),
+                            side: const BorderSide(color: Colors.red),
                             borderRadius: BorderRadius.circular(8)),
                         backgroundColor: Colors.white),
                     onPressed: () {},
@@ -91,60 +123,34 @@ class LoginPage extends StatelessWidget {
                         Container(
                           width: 33,
                           height: 33,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               image: DecorationImage(
                                   image: AssetImage(
                                       'assets/icon/icon_google.png'))),
                         ),
-                        Text(
+                        const Text(
                           'Google',
                           style: TextStyle(color: Colors.red),
                         ),
-                        SizedBox()
+                        const SizedBox()
                       ],
                     ),
                   ),
                 ),
               ),
-              SizedBox(height: 49),
-              Row(
+              const SizedBox(height: 49),
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('belum punya akun? silahkan '),
+                  Text('Belum punya akun? Silahkan '),
                   Text(
                     'mendaftar ',
                     style: TextStyle(color: Color(0xff3498db)),
                   ),
                   Text('sekarang')
                 ],
-              )
+              ),
             ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class CustomTextFormField extends StatelessWidget {
-  const CustomTextFormField({super.key, required this.label});
-
-  final String label;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(top: 25),
-      child: TextFormField(
-        decoration: InputDecoration(
-          label: Text(
-            label,
-            style: TextStyle(color: Color(0xffC0C0C0)),
-          ),
-          border: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Color(0xffC0C0C0),
-            ),
           ),
         ),
       ),

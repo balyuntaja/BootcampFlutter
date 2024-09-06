@@ -1,7 +1,61 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:sanberappflutter/pages/home/home_page.dart';
+import 'package:sanberappflutter/widget/custom_text_form_field.dart';
 
 class RegisterPage extends StatelessWidget {
-  const RegisterPage({super.key});
+  RegisterPage({super.key});
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
+
+  Future<void> _registerWithEmailAndPassword(BuildContext context) async {
+    if (_passwordController.text != _confirmPasswordController.text) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Password dan Konfirmasi Password tidak cocok'),
+        ),
+      );
+      return;
+    }
+
+    try {
+      UserCredential userCredential =
+          await _auth.createUserWithEmailAndPassword(
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Pendaftaran berhasil'),
+        ),
+      );
+
+      Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => HomePage()),
+      (Route<dynamic> route) => false,
+    );
+    } on FirebaseAuthException catch (e) {
+      String message = 'Terjadi kesalahan';
+      if (e.code == 'weak-password') {
+        message = 'Password terlalu lemah';
+      } else if (e.code == 'email-already-in-use') {
+        message = 'Email sudah terdaftar';
+      }
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(message),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,12 +80,17 @@ class RegisterPage extends StatelessWidget {
               SizedBox(height: 40),
               CustomTextFormField(
                 label: 'Masukkan Email',
+                controller: _emailController,
               ),
               CustomTextFormField(
                 label: 'Password',
+                controller: _passwordController,
+                obscureText: true,
               ),
               CustomTextFormField(
                 label: 'Konfirmasi Password',
+                controller: _confirmPasswordController,
+                obscureText: true,
               ),
               SizedBox(
                 height: 52,
@@ -41,7 +100,9 @@ class RegisterPage extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8)),
                       backgroundColor: Color(0xff3498DB)),
-                  onPressed: () {},
+                  onPressed: () {
+                    _registerWithEmailAndPassword(context);
+                  },
                   child: Text(
                     'Mendaftar',
                     style: TextStyle(color: Colors.white),
@@ -111,42 +172,23 @@ class RegisterPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text('Sudah punya akun? silahkan '),
-                  Text(
-                    'Masuk',
-                    style: TextStyle(color: Color(0xff3498db)),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context); // Kembali ke halaman login
+                    },
+                    child: Text(
+                      'Masuk',
+                      style: TextStyle(color: Color(0xff3498db)),
+                    ),
                   ),
                 ],
               )
             ],
           ),
         ),
-       ),
-    );
-  }
-}
-
-class CustomTextFormField extends StatelessWidget {
-  const CustomTextFormField({super.key, required this.label});
-
-  final String label;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(bottom: 25),
-      child: TextFormField(
-        decoration: InputDecoration(
-          label: Text(
-            label,
-            style: TextStyle(color: Color(0xffC0C0C0)),
-          ),
-          border: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Color(0xffC0C0C0),
-            ),
-          ),
-        ),
       ),
     );
   }
 }
+
+
