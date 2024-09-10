@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:sanberappflutter/user/model/user_model.dart'; // Ensure UserModel is imported
 
 class UserDetailPage extends StatelessWidget {
-  final user;
+  final UserModel user;
 
   UserDetailPage({required this.user});
 
@@ -27,7 +28,6 @@ class UserDetailPage extends StatelessWidget {
             Text('Last Name: ${user.lastName}', style: TextStyle(fontSize: 16)),
             SizedBox(height: 8.0),
             Text('Email: ${user.email}', style: TextStyle(fontSize: 16)),
-            // Add more details as needed
           ],
         ),
       ),

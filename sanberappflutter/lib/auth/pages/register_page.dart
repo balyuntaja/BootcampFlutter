@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sanberappflutter/pages/home/home_page.dart';
+import 'package:sanberappflutter/routes/app_routes_named.dart';
 import 'package:sanberappflutter/widget/custom_text_form_field.dart';
 
 class RegisterPage extends StatelessWidget {
@@ -36,11 +38,7 @@ class RegisterPage extends StatelessWidget {
         ),
       );
 
-      Navigator.pushAndRemoveUntil(
-      context,
-      MaterialPageRoute(builder: (context) => HomePage()),
-      (Route<dynamic> route) => false,
-    );
+      Get.offAllNamed(AppRoutesNamed.homePage);
     } on FirebaseAuthException catch (e) {
       String message = 'Terjadi kesalahan';
       if (e.code == 'weak-password') {
@@ -190,5 +188,3 @@ class RegisterPage extends StatelessWidget {
     );
   }
 }
-
-

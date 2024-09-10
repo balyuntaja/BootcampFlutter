@@ -13,7 +13,7 @@ class UserService {
         final data = response.data['data'];
         List<UserModel> users =
             List.from(data.map((user) => UserModel.fromJson(user)));
-            return users;
+        return users;
       }
       throw Exception();
     } catch (e) {

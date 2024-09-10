@@ -1,6 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sanberappflutter/pages/home/home_page.dart';
+import 'package:sanberappflutter/routes/app_routes.dart';
+import 'package:sanberappflutter/routes/app_routes_named.dart';
 import 'package:sanberappflutter/widget/custom_text_form_field.dart';
 
 class LoginPage extends StatelessWidget {
@@ -14,11 +17,7 @@ class LoginPage extends StatelessWidget {
       String email, String password, BuildContext context) async {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (context) => HomePage()),
-        (Route<dynamic> route) => false,
-      );
+      Get.offAllNamed(AppRoutesNamed.homePage);
       print("Login successful");
     } on FirebaseAuthException catch (e) {
       print('Login Error: ${e.message}');

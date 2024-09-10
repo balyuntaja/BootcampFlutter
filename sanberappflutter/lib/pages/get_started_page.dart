@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sanberappflutter/app/config/app_assets.dart';
 import 'package:sanberappflutter/auth/pages/login_page.dart';
 import 'package:sanberappflutter/auth/pages/register_page.dart';
+import 'package:sanberappflutter/routes/app_routes_named.dart';
 
 class GetStartedPage extends StatelessWidget {
   const GetStartedPage({super.key});
@@ -40,11 +42,7 @@ class GetStartedPage extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => LoginPage(),
-                        ));
+                    Get.toNamed(AppRoutesNamed.loginPage);
                   },
                   child: Text(
                     'Masuk',
@@ -66,11 +64,7 @@ class GetStartedPage extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => RegisterPage(),
-                        ));
+                    Get.toNamed(AppRoutesNamed.registerPage);
                   },
                   child: Text(
                     'Mendaftar',
